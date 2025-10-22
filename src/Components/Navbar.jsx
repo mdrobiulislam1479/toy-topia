@@ -16,14 +16,18 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="bg-[#80A1BA]">
+    <div className="bg-primary">
       <div className="navbar max-w-[1440px] mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="text-secondary mr-3 lg:hidden"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -39,13 +43,13 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow text-white"
+              className="menu menu-sm dropdown-content bg-primary rounded-box z-1 mt-6 w-[300px] p-2 shadow text-white"
             >
               {items}
             </ul>
           </div>
-          <Link to={"/"} className="text-2xl font-bold text-blue-600">
-            Toy<span className="font-medium text-green-800">Topia</span>
+          <Link to={"/"} className="text-2xl font-bold text-white">
+            Toy<span className="font-medium text-accent">Topia</span>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -54,13 +58,13 @@ const Navbar = () => {
         <div className="navbar-end gap-2">
           <Link
             to={"login"}
-            className="btn  border-green-800 text-green-800 bg-transparent shadow-none"
+            className="btn  border-secondary text-secondary bg-transparent shadow-none"
           >
             Log In
           </Link>
           <Link
             to={"register"}
-            className="btn bg-green-800 border-0 shadow-none text-white"
+            className="btn bg-secondary border-0 shadow-none text-white"
           >
             Register
           </Link>
