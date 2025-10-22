@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
@@ -58,13 +57,13 @@ const Navbar = () => {
         <div className="navbar-end gap-2">
           <Link
             to={"login"}
-            className="btn  border-secondary text-secondary bg-transparent shadow-none"
+            className="btn  border-secondary text-secondary hover:bg-secondary hover:text-white bg-transparent shadow-none"
           >
             Log In
           </Link>
           <Link
             to={"register"}
-            className="btn bg-secondary border-0 shadow-none text-white"
+            className="btn bg-secondary/70 hover:bg-secondary border-0 shadow-none text-white"
           >
             Register
           </Link>

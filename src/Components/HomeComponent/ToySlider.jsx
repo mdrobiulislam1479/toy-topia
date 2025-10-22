@@ -1,4 +1,3 @@
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 
@@ -16,7 +15,7 @@ const ToySlider = () => {
   ];
 
   return (
-    <div className="py-10 px-4">
+    <div className="py-10 px-4 max-w-[1440px] mx-auto">
       <Swiper
         spaceBetween={30}
         slidesPerView={1}
