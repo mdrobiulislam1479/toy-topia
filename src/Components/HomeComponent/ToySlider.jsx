@@ -15,7 +15,7 @@ const ToySlider = () => {
   ];
 
   return (
-    <div className="py-10 px-4 max-w-[1440px] mx-auto">
+    <div className="pt-24 pb-6 px-4 max-w-[1440px] mx-auto">
       <Swiper
         spaceBetween={30}
         slidesPerView={1}

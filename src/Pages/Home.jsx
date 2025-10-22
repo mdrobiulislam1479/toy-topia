@@ -1,6 +1,7 @@
 import ToySlider from "../Components/HomeComponent/ToySlider";
 import PopularToys from "../Components/HomeComponent/PopularToys";
 import RetailPartners from "../Components/HomeComponent/RetailPartners";
+import ContactSection from "../Components/HomeComponent/ContactSection";
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <ToySlider />
       <PopularToys />
       <RetailPartners />
+      <ContactSection/>
     </div>
   );
 };
