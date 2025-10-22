@@ -6,7 +6,7 @@ const AllToys = () => {
   return (
     <div>
       <title>ToyTopia | All Toys</title>
-      <section className="md:py-10 px-4 max-w-[1440px] mx-auto">
+      <section className="py-26 px-4 max-w-[1440px] mx-auto">
         <h1 className="text-3xl font-bold text-center mb-8">Our All Toys</h1>
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
           {data.map((toy, index) => (

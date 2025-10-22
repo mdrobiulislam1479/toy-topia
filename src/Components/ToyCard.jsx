@@ -1,4 +1,5 @@
 import { IoIosStar } from "react-icons/io";
+import { Link } from "react-router";
 
 const ToyCard = ({ toy }) => {
   return (
@@ -24,9 +25,11 @@ const ToyCard = ({ toy }) => {
           </p>
         </div>
 
-        <button className="mt-4 w-full bg-secondary/70 text-white py-2 px-4 rounded hover:bg-secondary transition">
-          View More
-        </button>
+        <div className="mt-4 flex  bg-secondary/70 text-white py-2 px-4 rounded hover:bg-secondary transition text-center">
+          <Link to={`/all-toys/${toy.toyId}`} className="w-full">
+            View More
+          </Link>
+        </div>
       </div>
     </div>
   );

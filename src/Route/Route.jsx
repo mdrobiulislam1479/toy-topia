@@ -5,12 +5,13 @@ import AllToys from "../Pages/AllToys";
 import AboutUs from "../Pages/AboutUs";
 import LogIn from "../Pages/LogIn";
 import Register from "../Pages/Register";
+import ToyDetails from "../Pages/ToyDetails";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    
+
     children: [
       {
         index: true,
@@ -25,12 +26,16 @@ export const router = createBrowserRouter([
         element: <AboutUs />,
       },
       {
-        path: "login",
+        path: "/login",
         element: <LogIn />,
       },
       {
-        path: "register",
+        path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/all-toys/:id",
+        element: <ToyDetails />,
       },
     ],
   },
