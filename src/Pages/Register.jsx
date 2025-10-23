@@ -9,7 +9,7 @@ import { AuthContext } from "../Contexts/AuthContext";
 import { updateProfile } from "firebase/auth";
 
 export default function Register() {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, signInWithGoogle } = useContext(AuthContext);
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -36,6 +36,17 @@ export default function Register() {
         });
         e.target.reset();
         navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        console.log(result.user);
+        navigate(location?.state || "/");
       })
       .catch((error) => {
         console.log(error);
@@ -154,6 +165,7 @@ export default function Register() {
         <div className="mt-4">
           <button
             type="button"
+            onClick={handleGoogleSignIn}
             className="w-full flex items-center justify-center gap-2 border border-gray-300 py-2 rounded-md hover:bg-gray-100 transition"
           >
             <FcGoogle size={24} />

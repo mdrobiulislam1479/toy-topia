@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
 
 const LogIn = () => {
-  const { signInUser } = use(AuthContext);
+  const { signInUser, signInWithGoogle } = use(AuthContext);
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
@@ -22,6 +22,17 @@ const LogIn = () => {
         console.log(result.user);
         e.target.reset();
         navigate(location.state || "/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        console.log(result.user);
+        navigate(location?.state || "/");
       })
       .catch((error) => {
         console.log(error);
@@ -94,6 +105,7 @@ const LogIn = () => {
         <div className="mt-4">
           <button
             type="button"
+            onClick={handleGoogleSignIn}
             className="w-full flex items-center justify-center gap-2 border border-gray-300 py-2 rounded-md hover:bg-gray-100 transition"
           >
             <FcGoogle size={24} />
