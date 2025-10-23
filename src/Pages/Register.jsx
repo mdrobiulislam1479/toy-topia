@@ -6,10 +6,11 @@ import { IoEyeOutline } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
-import { updateProfile } from "firebase/auth";
+import { signOut, updateProfile } from "firebase/auth";
+import { auth } from "../../firebase.config";
 
 export default function Register() {
-  const { createUser, signInWithGoogle } = useContext(AuthContext);
+  const { createUser, signInWithGoogle, setLoading } = useContext(AuthContext);
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export default function Register() {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    setLoading(true);
     const name = e.target.name.value;
     const photoURL = e.target.photoURL.value;
     const email = e.target.email.value;
@@ -34,8 +36,11 @@ export default function Register() {
           displayName: name,
           photoURL: photoURL,
         });
-        e.target.reset();
-        navigate("/login");
+        signOut(auth).then(() => {
+          setLoading(false);
+          e.target.reset();
+          navigate("/login");
+        });
       })
       .catch((error) => {
         console.log(error);

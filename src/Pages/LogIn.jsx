@@ -57,6 +57,7 @@ const LogIn = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:outline-none"
               placeholder="Enter your email"
+              required
             />
           </div>
 
@@ -70,6 +71,7 @@ const LogIn = () => {
                 name="password"
                 className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:outline-none"
                 placeholder="Enter your password"
+                required
               />
               <button
                 type="button"

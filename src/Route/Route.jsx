@@ -9,6 +9,7 @@ import ToyDetails from "../Pages/ToyDetails";
 import ErrorPage from "../Pages/ErrorPage";
 import ForgetPassword from "../Pages/ForgotPassword";
 import MyProfile from "../Pages/MyProfile";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -22,7 +23,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/all-toys",
-        element: <AllToys />,
+        element: (
+          <PrivateRoute>
+            <AllToys />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/about-us",
@@ -46,7 +51,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/all-toys/:id",
-        element: <ToyDetails />,
+        element: (
+          <PrivateRoute>
+            <ToyDetails />
+          </PrivateRoute>
+        ),
       },
     ],
   },
