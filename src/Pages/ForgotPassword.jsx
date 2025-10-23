@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { Link, useLocation } from "react-router";
+import { AuthContext } from "../Contexts/AuthContext";
 
 const ForgetPassword = () => {
+  const { forgotPassword } = use(AuthContext);
   const location = useLocation();
   const [email, setEmail] = useState("");
 
@@ -13,7 +15,13 @@ const ForgetPassword = () => {
 
   const handleReset = (e) => {
     e.preventDefault();
-    window.location.href = "https://mail.google.com";
+    forgotPassword(email)
+      .then(() => {
+        console.log("Password reset email sent!");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   return (
