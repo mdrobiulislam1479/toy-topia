@@ -8,6 +8,7 @@ import Register from "../Pages/Register";
 import ToyDetails from "../Pages/ToyDetails";
 import ErrorPage from "../Pages/ErrorPage";
 import ToyDetailsError from "../Pages/ToyDetailsError";
+import ForgetPassword from "../Pages/ForgotPassword";
 
 export const router = createBrowserRouter([
   {
@@ -36,13 +37,13 @@ export const router = createBrowserRouter([
         element: <Register />,
       },
       {
+        path: "/forgot-password",
+        element: <ForgetPassword />,
+      },
+      {
         path: "/all-toys/:id",
         element: <ToyDetails />,
       },
-      // {
-      //   path: "/all-toys/:*",
-      //   element: <ToyDetailsError />,
-      // },
     ],
   },
 ]);
