@@ -6,12 +6,14 @@ import AboutUs from "../Pages/AboutUs";
 import LogIn from "../Pages/LogIn";
 import Register from "../Pages/Register";
 import ToyDetails from "../Pages/ToyDetails";
+import ErrorPage from "../Pages/ErrorPage";
+import ToyDetailsError from "../Pages/ToyDetailsError";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -37,6 +39,10 @@ export const router = createBrowserRouter([
         path: "/all-toys/:id",
         element: <ToyDetails />,
       },
+      // {
+      //   path: "/all-toys/:*",
+      //   element: <ToyDetailsError />,
+      // },
     ],
   },
 ]);

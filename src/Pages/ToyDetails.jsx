@@ -2,9 +2,11 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import useDataLoad from "../Hooks/useDataLoad";
 import { useParams } from "react-router";
+import LoadingSpinner from "../Components/LoadingSpinner";
+import ToyDetailsError from "./ToyDetailsError";
 
 const ToyDetails = () => {
-  const { data } = useDataLoad();
+  const { data, loading } = useDataLoad();
   const { id } = useParams();
   const [formData, setFormData] = useState({ name: "", email: "" });
 
@@ -40,19 +42,18 @@ const ToyDetails = () => {
   };
 
   if (!toy) {
-    return (
-      <div className="text-center py-20 text-gray-600 text-xl">Loading...</div>
-    );
+    return <div>{loading ? <LoadingSpinner /> : <ToyDetailsError />}</div>;
   }
 
   return (
     <div className="max-w-[1440px] mx-auto px-4 pt-30 pb-10">
+      <title>{toy.toyName}</title>
       <div className="">
         <div className="lg:flex items-start gap-10 pb-10">
           <img
             src={toy.pictureURL}
             alt={toy.toyName}
-            className="rounded-lg shadow-lg mb-6 lg:mb-0 max-w-[390px] mx-auto "
+            className="rounded-lg shadow-lg mb-6 lg:mb-0 sm:max-w-[390px] mx-auto "
           />
           <div className="flex-1">
             <h2 className="text-3xl font-bold mb-4 text-gray-800">
