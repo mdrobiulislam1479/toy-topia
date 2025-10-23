@@ -1,6 +1,21 @@
+import { use } from "react";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "../Contexts/AuthContext";
+import { BarLoader } from "react-spinners";
 
 const Navbar = () => {
+  const { user, signOutUser, loading } = use(AuthContext);
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        console.log("Log Out Successful");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const items = (
     <>
       <li>
@@ -12,6 +27,11 @@ const Navbar = () => {
       <li>
         <NavLink to={"/about-us"}>About Us</NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink to={"/my-profile"}>My Profile</NavLink>
+        </li>
+      )}
     </>
   );
   return (
@@ -54,20 +74,49 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-white">{items}</ul>
         </div>
-        <div className="navbar-end gap-2">
-          <Link
-            to={"login"}
-            className="btn  border-secondary text-secondary hover:bg-secondary hover:text-white bg-transparent shadow-none"
-          >
-            Log In
-          </Link>
-          <Link
-            to={"register"}
-            className="btn bg-secondary/70 hover:bg-secondary border-0 shadow-none text-white"
-          >
-            Register
-          </Link>
-        </div>
+        {loading ? (
+          <p className="navbar-end">
+            <BarLoader color="gray" />
+          </p>
+        ) : user ? (
+          <div className="navbar-end">
+            <div
+              className="tooltip tooltip-bottom"
+              data-tip={user.displayName || "User"}
+            >
+              <img
+                src={
+                  user.photoURL ||
+                  "https://img.icons8.com/glyph-neue/64/user-male-circle.png"
+                }
+                className="rounded-full w-[50px] border border-secondary cursor-pointer"
+                alt="User profile"
+              />
+            </div>
+
+            <button
+              className="btn bg-secondary/70 hover:bg-secondary border-0 shadow-none text-white ml-3"
+              onClick={handleSignOut}
+            >
+              Log Out
+            </button>
+          </div>
+        ) : (
+          <div className="navbar-end gap-2">
+            <Link
+              to={"login"}
+              className="btn  border-secondary text-secondary hover:bg-secondary hover:text-white bg-transparent shadow-none"
+            >
+              Log In
+            </Link>
+            <Link
+              to={"register"}
+              className="btn bg-secondary/70 hover:bg-secondary border-0 shadow-none text-white"
+            >
+              Register
+            </Link>
+          </div>
+        )}
       </div>
     </nav>
   );
