@@ -6,7 +6,6 @@ import { NavLink } from "react-router";
 const PopularToys = () => {
   const { data } = useDataLoad();
   const toyData = data?.filter((toy) => toy.rating > 4.8) || [];
-  console.log(toyData);
 
   return (
     <section className="md:py-10 px-4 max-w-[1440px] mx-auto">

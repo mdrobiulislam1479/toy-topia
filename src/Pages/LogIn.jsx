@@ -1,13 +1,32 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { IoEyeOutline } from "react-icons/io5";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
+import { AuthContext } from "../Contexts/AuthContext";
 
 const LogIn = () => {
+  const { signInUser } = use(AuthContext);
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const handleLogIn = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    signInUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        e.target.reset();
+        navigate(location.state || "/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -15,13 +34,14 @@ const LogIn = () => {
       <div className="w-full max-w-md sm:bg-white rounded-lg sm:shadow-md p-8">
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
 
-        <form className="space-y-4">
+        <form className="space-y-4 " onSubmit={handleLogIn}>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Email
             </label>
             <input
               type="email"
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:outline-none"
@@ -36,6 +56,7 @@ const LogIn = () => {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
+                name="password"
                 className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:outline-none"
                 placeholder="Enter your password"
               />
@@ -62,7 +83,7 @@ const LogIn = () => {
           </div>
 
           <button
-            type="button"
+            type="submit"
             className="w-full py-2 bg-primary/80 hover:bg-primary text-white rounded-md font-semibold transition"
           >
             Login
