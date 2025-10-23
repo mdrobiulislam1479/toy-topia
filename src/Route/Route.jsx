@@ -7,7 +7,6 @@ import LogIn from "../Pages/LogIn";
 import Register from "../Pages/Register";
 import ToyDetails from "../Pages/ToyDetails";
 import ErrorPage from "../Pages/ErrorPage";
-import ToyDetailsError from "../Pages/ToyDetailsError";
 import ForgetPassword from "../Pages/ForgotPassword";
 
 export const router = createBrowserRouter([

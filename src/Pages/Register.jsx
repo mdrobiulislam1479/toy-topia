@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FaCircleCheck } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { IoEyeOutline } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../Contexts/AuthContext";
+import { updateProfile } from "firebase/auth";
 
 export default function Register() {
+  const { createUser } = useContext(AuthContext);
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const hasUppercase = /[A-Z]/.test(password);
   const hasLowercase = /[a-z]/.test(password);
@@ -16,20 +20,45 @@ export default function Register() {
 
   const allValid = hasUppercase && hasLowercase && hasMinLength;
 
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const photoURL = e.target.photoURL.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        updateProfile(result.user, {
+          displayName: name,
+          photoURL: photoURL,
+        });
+        e.target.reset();
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <title>ToyTopia | Register</title>
       <div className="w-full max-w-md sm:bg-white rounded-lg sm:shadow-md p-8">
         <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleRegister}>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Name
             </label>
             <input
               type="text"
+              name="name"
               placeholder="Enter your name"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:outline-none"
+              required
             />
           </div>
 
@@ -39,6 +68,7 @@ export default function Register() {
             </label>
             <input
               type="url"
+              name="photoURL"
               placeholder="Enter photo URL"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:outline-none"
             />
@@ -50,8 +80,10 @@ export default function Register() {
             </label>
             <input
               type="email"
+              name="email"
               placeholder="Enter your email"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:outline-none"
+              required
             />
           </div>
 
@@ -62,6 +94,7 @@ export default function Register() {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
+                name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
@@ -105,7 +138,7 @@ export default function Register() {
           </div>
 
           <button
-            type="button"
+            type="submit"
             className={`w-full py-2 rounded-md font-semibold text-white transition ${
               allValid
                 ? "bg-primary/80 hover:bg-primary"

@@ -18,9 +18,9 @@ const ForgetPassword = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <title>ToyTopia | Forgot Password</title>
       <div className="w-full max-w-md sm:bg-white rounded-lg sm:shadow-md p-8">
         <h2 className="text-2xl font-bold text-center mb-6">Forgot Password</h2>
-
         <form onSubmit={handleReset} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
