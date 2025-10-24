@@ -18,6 +18,7 @@ const ForgetPassword = () => {
     forgotPassword(email)
       .then(() => {
         console.log("Password reset email sent!");
+        window.open("https://mail.google.com", "_blank");
       })
       .catch((error) => {
         console.log(error.message);
