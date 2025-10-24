@@ -1,7 +1,6 @@
 import error404 from "../assets/error-404.png";
 import { NavLink } from "react-router";
 import useDataLoad from "../Hooks/useDataLoad";
-
 import LoadingSpinner from "../Components/LoadingSpinner";
 
 const ErrorPage = () => {

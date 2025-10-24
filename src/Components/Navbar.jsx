@@ -1,11 +1,12 @@
-import { use } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
 import { BarLoader } from "react-spinners";
 import { toast } from "react-toastify";
+import { useContext } from "react";
+import { RxCross2 } from "react-icons/rx";
 
 const Navbar = () => {
-  const { user, signOutUser, loading } = use(AuthContext);
+  const { user, signOutUser, loading } = useContext(AuthContext);
 
   const handleSignOut = () => {
     signOutUser()
@@ -17,33 +18,47 @@ const Navbar = () => {
       });
   };
 
+  const closeDrawer = () => {
+    const drawerToggle = document.getElementById("navbar-drawer");
+    if (drawerToggle) drawerToggle.checked = false;
+  };
+
   const items = (
     <>
       <li>
-        <NavLink to={"/"}>Home</NavLink>
+        <NavLink to={"/"} onClick={closeDrawer}>
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to={"/all-toys"}>All Toys</NavLink>
+        <NavLink to={"/all-toys"} onClick={closeDrawer}>
+          All Toys
+        </NavLink>
       </li>
       <li>
-        <NavLink to={"/about-us"}>About Us</NavLink>
+        <NavLink to={"/about-us"} onClick={closeDrawer}>
+          About Us
+        </NavLink>
       </li>
       {user && (
         <li>
-          <NavLink to={"/my-profile"}>My Profile</NavLink>
+          <NavLink to={"/my-profile"} onClick={closeDrawer}>
+            My Profile
+          </NavLink>
         </li>
       )}
     </>
   );
+
   return (
-    <nav className="bg-primary fixed w-full z-50" data-aos="fade-down">
-      <div className="navbar max-w-[1440px] mx-auto">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div
-              tabIndex={0}
-              role="button"
-              className="text-secondary mr-3 lg:hidden cursor-pointer"
+    <nav className="drawer fixed z-50 w-full">
+      <input id="navbar-drawer" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content bg-primary">
+        <nav className="navbar max-w-[1440px] mx-auto text-white">
+          <div className="navbar-start flex items-center">
+            <label
+              htmlFor="navbar-drawer"
+              className="lg:hidden text-white px-3 cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -52,74 +67,83 @@ const Navbar = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                {" "}
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />{" "}
-              </svg>
-            </div>
-            <ul
-              tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-primary rounded-box  mt-6 w-[300px] p-2 shadow text-white z-10"
-            >
-              {items}
-            </ul>
-          </div>
-          <Link to={"/"} className="text-2xl font-bold text-white">
-            Toy<span className="font-medium text-accent">Topia</span>
-          </Link>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 text-white">{items}</ul>
-        </div>
-        {loading ? (
-          <p className="navbar-end">
-            <BarLoader color="gray" />
-          </p>
-        ) : user ? (
-          <div className="navbar-end">
-            <div
-              className="tooltip tooltip-bottom"
-              data-tip={user.displayName || "User"}
-            >
-              <Link to={"/my-profile"}>
-                <img
-                  src={
-                    user.photoURL ||
-                    "https://img.icons8.com/glyph-neue/64/user-male-circle.png"
-                  }
-                  className="rounded-full w-[50px] border border-secondary cursor-pointer"
-                  alt="User profile"
+                  d="M4 6h16M4 12h16M4 18h16"
                 />
+              </svg>
+            </label>
+            <Link to={"/"} className="text-2xl font-bold text-white">
+              Toy<span className="font-medium text-accent">Topia</span>
+            </Link>
+          </div>
+          <div className="navbar-center hidden lg:flex">
+            <ul className="menu menu-horizontal px-1">{items}</ul>
+          </div>
+          {loading ? (
+            <p className="navbar-end">
+              <BarLoader color="gray" />
+            </p>
+          ) : user ? (
+            <div className="navbar-end flex items-center gap-2">
+              <div
+                className="tooltip tooltip-bottom"
+                data-tip={user.displayName || "User"}
+              >
+                <Link to={"/my-profile"}>
+                  <img
+                    src={
+                      user.photoURL ||
+                      "https://img.icons8.com/glyph-neue/64/user-male-circle.png"
+                    }
+                    className="rounded-full w-[45px] border border-secondary cursor-pointer"
+                    alt="User profile"
+                  />
+                </Link>
+              </div>
+              <button
+                className="btn bg-secondary/70 hover:bg-secondary border-0 shadow-none text-white"
+                onClick={handleSignOut}
+              >
+                Log Out
+              </button>
+            </div>
+          ) : (
+            <div className="navbar-end flex gap-2">
+              <Link
+                to={"/login"}
+                className="btn border-secondary text-secondary hover:bg-secondary hover:text-white bg-transparent shadow-none"
+              >
+                Log In
+              </Link>
+              <Link
+                to={"/register"}
+                className="btn bg-secondary/70 hover:bg-secondary border-0 shadow-none text-white"
+              >
+                Register
               </Link>
             </div>
-
-            <button
-              className="btn bg-secondary/70 hover:bg-secondary border-0 shadow-none text-white ml-3"
-              onClick={handleSignOut}
+          )}
+        </nav>
+      </div>
+      <div className="drawer-side z-50">
+        <label htmlFor="navbar-drawer" className="drawer-overlay"></label>
+        <ul className="menu p-4 w-64 min-h-full bg-primary text-white">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold">
+              Toy<span className="text-accent">Topia</span>
+            </h2>
+            <label
+              htmlFor="navbar-drawer"
+              className="text-white cursor-pointer"
             >
-              Log Out
-            </button>
+              <RxCross2 size={24} />
+            </label>
           </div>
-        ) : (
-          <div className="navbar-end gap-2">
-            <Link
-              to={"login"}
-              className="btn  border-secondary text-secondary hover:bg-secondary hover:text-white bg-transparent shadow-none"
-            >
-              Log In
-            </Link>
-            <Link
-              to={"register"}
-              className="btn bg-secondary/70 hover:bg-secondary border-0 shadow-none text-white"
-            >
-              Register
-            </Link>
-          </div>
-        )}
+          {items}
+        </ul>
       </div>
     </nav>
   );
