@@ -84,14 +84,16 @@ const Navbar = () => {
               className="tooltip tooltip-bottom"
               data-tip={user.displayName || "User"}
             >
-              <img
-                src={
-                  user.photoURL ||
-                  "https://img.icons8.com/glyph-neue/64/user-male-circle.png"
-                }
-                className="rounded-full w-[50px] border border-secondary cursor-pointer"
-                alt="User profile"
-              />
+              <Link to={"/my-profile"}>
+                <img
+                  src={
+                    user.photoURL ||
+                    "https://img.icons8.com/glyph-neue/64/user-male-circle.png"
+                  }
+                  className="rounded-full w-[50px] border border-secondary cursor-pointer"
+                  alt="User profile"
+                />
+              </Link>
             </div>
 
             <button

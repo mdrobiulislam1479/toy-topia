@@ -10,7 +10,7 @@ const Home = () => {
       <ToySlider />
       <PopularToys />
       <RetailPartners />
-      <ContactSection/>
+      <ContactSection />
     </div>
   );
 };
