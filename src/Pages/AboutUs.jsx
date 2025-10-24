@@ -1,18 +1,24 @@
 const AboutUs = () => {
   return (
-    <div className="py-26 px-6">
+    <div className="py-26 px-6 ">
       <title>ToyTopia | About Us</title>
       <div className="max-w-[1440px] mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-6  text-base-300">
+        <h1
+          className="text-4xl font-bold text-center mb-6  text-base-300"
+          data-aos="fade-up"
+        >
           About <span className="text-secondary">ToyTopia</span>
         </h1>
-        <p className="text-lg text-center text-base-200 mb-10">
+        <p
+          className="text-lg text-center text-base-200 mb-10"
+          data-aos="fade-up"
+        >
           At ToyTopia, we believe in the power of play. Our mission is to create
           a joyful world where children can explore, learn, and grow through
           high-quality toys designed to inspire imagination.
         </p>
         <div className="grid gap-10 md:grid-cols-2">
-          <div>
+          <div data-aos="fade-up">
             <h2 className="text-2xl font-semibold text-secondary mb-2">
               Our Story
             </h2>
@@ -23,7 +29,7 @@ const AboutUs = () => {
               store, our journey has been fueled by love and creativity.
             </p>
           </div>
-          <div>
+          <div data-aos="fade-up">
             <h2 className="text-2xl font-semibold text-secondary mb-2">
               Our Values
             </h2>
@@ -44,7 +50,7 @@ const AboutUs = () => {
               </li>
             </ul>
           </div>
-          <div>
+          <div data-aos="fade-up">
             <h2 className="text-2xl font-semibold text-secondary mb-2">
               Our Team
             </h2>
@@ -54,7 +60,7 @@ const AboutUs = () => {
               and tested by real kids — and approved with giggles!
             </p>
           </div>
-          <div>
+          <div data-aos="fade-up">
             <h2 className="text-2xl font-semibold text-secondary mb-2">
               Our Promise
             </h2>
@@ -65,7 +71,7 @@ const AboutUs = () => {
             </p>
           </div>
         </div>
-        <div className="mt-12 text-center">
+        <div className="mt-12 text-center" data-aos="fade-up">
           <h3 className="text-xl font-semibold text-base-300 mb-4">
             Thank you for being part of the ToyTopia family!
           </h3>

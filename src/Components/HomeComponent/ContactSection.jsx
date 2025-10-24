@@ -22,7 +22,10 @@ const ContactSection = () => {
         }}
       ></div>
 
-      <div className="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center z-10">
+      <div
+        className="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center z-10"
+        data-aos="fade-right"
+      >
         <div className="space-y-8">
           <h2 className="text-3xl font-bold">Contact Us</h2>
           <p className="text-gray-300">
@@ -65,7 +68,10 @@ const ContactSection = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded shadow-lg p-8 text-gray-800">
+        <div
+          className="bg-white rounded shadow-lg p-8 text-gray-800"
+          data-aos="zoom-in"
+        >
           <h3 className="text-xl font-bold mb-6">Send Message</h3>
           <form className="space-y-6" onSubmit={handleSend}>
             <div>

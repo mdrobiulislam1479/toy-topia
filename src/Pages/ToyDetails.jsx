@@ -48,14 +48,15 @@ const ToyDetails = () => {
   return (
     <div className="max-w-[1440px] mx-auto px-4 pt-30 pb-10">
       <title>{toy.toyName}</title>
-      <div className="">
+      <div className="" data-aos="fade-down">
         <div className="lg:flex items-start gap-10 pb-10">
           <img
             src={toy.pictureURL}
             alt={toy.toyName}
             className="rounded-lg shadow-lg mb-6 lg:mb-0 sm:max-w-[390px] mx-auto "
+            data-aos="zoom-in"
           />
-          <div className="flex-1">
+          <div className="flex-1 " data-aos="fade-left">
             <h2 className="text-3xl font-bold mb-4 text-gray-800">
               {toy.toyName}
             </h2>
@@ -112,7 +113,10 @@ const ToyDetails = () => {
           </div>
         </div>
 
-        <div className="bg-gray-100 p-8 shadow-lg rounded-lg">
+        <div
+          className="bg-gray-100 p-8 shadow-lg rounded-lg"
+          data-aos="fade-down"
+        >
           <h3 className="text-xl font-bold mb-6 text-gray-800">Try Now</h3>
 
           <form className="space-y-5" onSubmit={handleSubmit}>

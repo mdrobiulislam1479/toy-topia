@@ -36,14 +36,14 @@ const Navbar = () => {
     </>
   );
   return (
-    <nav className="bg-primary fixed w-full z-50">
+    <nav className="bg-primary fixed w-full z-50" data-aos="fade-down">
       <div className="navbar max-w-[1440px] mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div
               tabIndex={0}
               role="button"
-              className="text-secondary mr-3 lg:hidden"
+              className="text-secondary mr-3 lg:hidden cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

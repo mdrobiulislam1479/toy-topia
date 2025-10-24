@@ -10,7 +10,9 @@ const PopularToys = () => {
 
   return (
     <section className="md:py-10 px-4 max-w-[1440px] mx-auto">
-      <h1 className="text-3xl font-bold text-center mb-8">Popular Toys</h1>
+      <h1 className="text-3xl font-bold text-center mb-8" data-aos="fade-right">
+        Popular Toys
+      </h1>
       {loading ? (
         <PropagateLoader color="skyblue" className="text-center" />
       ) : (
@@ -24,6 +26,7 @@ const PopularToys = () => {
             <NavLink
               to={"/all-toys"}
               className="btn bg-secondary/70 hover:bg-secondary text-white border-0 w-[200px]"
+              data-aos="zoom-in"
             >
               Show All Apps <FaArrowRightLong className="animate-pulse" />
             </NavLink>

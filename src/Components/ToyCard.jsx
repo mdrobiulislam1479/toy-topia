@@ -3,7 +3,10 @@ import { Link } from "react-router";
 
 const ToyCard = ({ toy }) => {
   return (
-    <div className="bg-primary/20 shadow-md rounded-lg overflow-hidden duration-200 hover:scale-105 p-5 flex flex-col justify-between">
+    <div
+      className="bg-primary/20 shadow-md rounded-lg overflow-hidden duration-200 hover:scale-105 p-5 flex flex-col justify-between "
+      data-aos="fade-up"
+    >
       <div className="bg-white rounded-xl relative">
         <img
           src={toy.pictureURL}
