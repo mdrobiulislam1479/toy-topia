@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
 import { signOut, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase.config";
+import { toast } from "react-toastify";
 
 export default function Register() {
   const { createUser, signInWithGoogle, setLoading } = useContext(AuthContext);
@@ -31,7 +32,6 @@ export default function Register() {
 
     createUser(email, password)
       .then((result) => {
-        console.log(result.user);
         updateProfile(result.user, {
           displayName: name,
           photoURL: photoURL,
@@ -40,21 +40,56 @@ export default function Register() {
           setLoading(false);
           e.target.reset();
           navigate("/login");
+          toast.success("Registration successful! Please log in.");
         });
       })
       .catch((error) => {
-        console.log(error);
+        setLoading(false);
+        if (!error?.code) {
+          toast.error("An unknown error occurred.");
+          return;
+        }
+
+        if (error.code === "auth/email-already-in-use") {
+          toast.error("Email is already in use. Try logging in instead.");
+        } else if (error.code === "auth/invalid-email") {
+          toast.error("Invalid email address.");
+        } else if (error.code === "auth/operation-not-allowed") {
+          toast.error("Email/password accounts are not enabled.");
+        } else if (error.code === "auth/weak-password") {
+          toast.error(
+            "Password is too weak. Please use at least 6 characters."
+          );
+        } else if (error.code === "auth/network-request-failed") {
+          toast.error("Network error. Check your internet connection.");
+        } else {
+          toast.error(`${error.message}`);
+        }
       });
   };
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        toast.success("Google sign in successful!");
         navigate(location?.state || "/");
+        setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        setLoading(false);
+        if (error.code === "auth/popup-closed-by-user") {
+          toast.error("Sign-in popup was closed before completing.");
+        } else if (error.code === "auth/cancelled-popup-request") {
+          toast.error("Cancelled previous popup request. Try again.");
+        } else if (
+          error.code === "auth/account-exists-with-different-credential"
+        ) {
+          toast.error(
+            "An account already exists with the same email but different sign-in method."
+          );
+        } else {
+          toast.error(`${error.message}`);
+        }
       });
   };
 

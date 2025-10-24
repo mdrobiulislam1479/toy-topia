@@ -1,9 +1,10 @@
 import { useState, useEffect, use } from "react";
 import { Link, useLocation } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
+import { toast } from "react-toastify";
 
 const ForgetPassword = () => {
-  const { forgotPassword } = use(AuthContext);
+  const { forgotPassword, setLoading } = use(AuthContext);
   const location = useLocation();
   const [email, setEmail] = useState("");
 
@@ -17,11 +18,27 @@ const ForgetPassword = () => {
     e.preventDefault();
     forgotPassword(email)
       .then(() => {
-        console.log("Password reset email sent!");
+        toast.success("Password reset email sent!");
         window.open("https://mail.google.com", "_blank");
+        setLoading(false);
       })
       .catch((error) => {
-        console.log(error.message);
+        setLoading(false);
+        if (!error?.code) {
+          toast.error("An unknown error occurred.");
+        } else if (error.code === "auth/invalid-email") {
+          toast.error("Invalid email address.");
+        } else if (error.code === "auth/user-not-found") {
+          toast.error("No account found with this email.");
+        } else if (error.code === "auth/network-request-failed") {
+          toast.error("Network error. Check your internet connection.");
+        } else if (error.code === "auth/too-many-requests") {
+          toast.error("Too many requests. Try again later.");
+        } else if (error.code === "auth/invalid-credential") {
+          toast.error("The login credential is invalid. Please try again.");
+        } else {
+          toast.error(`${error.message}`);
+        }
       });
   };
 

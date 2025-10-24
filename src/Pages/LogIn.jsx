@@ -4,9 +4,10 @@ import { FcGoogle } from "react-icons/fc";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
+import { toast } from "react-toastify";
 
 const LogIn = () => {
-  const { signInUser, signInWithGoogle } = use(AuthContext);
+  const { signInUser, signInWithGoogle, setLoading } = use(AuthContext);
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
@@ -18,24 +19,59 @@ const LogIn = () => {
     const password = e.target.password.value;
 
     signInUser(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        toast.success("Log In successful!");
         e.target.reset();
         navigate(location.state || "/");
+        setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        setLoading(false);
+        if (!error?.code) {
+          toast.error("An unknown error occurred.");
+          return;
+        }
+
+        if (error.code === "auth/invalid-email") {
+          toast.error("Invalid email address.");
+        } else if (error.code === "auth/user-disabled") {
+          toast.error("This user account has been disabled.");
+        } else if (error.code === "auth/user-not-found") {
+          toast.error("No account found with this email.");
+        } else if (error.code === "auth/wrong-password") {
+          toast.error("Incorrect password. Please try again.");
+        } else if (error.code === "auth/network-request-failed") {
+          toast.error("Network error. Check your internet connection.");
+        } else if (error.code === "auth/invalid-credential") {
+          toast.error("The login credential is invalid. Please try again.");
+        } else {
+          toast.error(`${error.message}`);
+        }
       });
   };
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        toast.success("Google sign in successful!");
         navigate(location?.state || "/");
+        setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        setLoading(false);
+        if (error.code === "auth/popup-closed-by-user") {
+          toast.error("Sign-in popup was closed before completing.");
+        } else if (error.code === "auth/cancelled-popup-request") {
+          toast.error("Cancelled previous popup request. Try again.");
+        } else if (
+          error.code === "auth/account-exists-with-different-credential"
+        ) {
+          toast.error(
+            "An account already exists with the same email but different sign-in method."
+          );
+        } else {
+          toast.error(`${error.message}`);
+        }
       });
   };
 

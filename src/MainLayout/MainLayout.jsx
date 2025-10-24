@@ -6,7 +6,6 @@ import LoadingSpinner from "../Components/LoadingSpinner";
 
 const MainLayout = () => {
   const { loading } = useDataLoad();
-  console.log(loading);
 
   return (
     <>

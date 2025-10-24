@@ -2,6 +2,7 @@ import { use } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
 import { BarLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { user, signOutUser, loading } = use(AuthContext);
@@ -9,10 +10,10 @@ const Navbar = () => {
   const handleSignOut = () => {
     signOutUser()
       .then(() => {
-        console.log("Log Out Successful");
+        toast.success("Log Out Successful");
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(error.message);
       });
   };
 

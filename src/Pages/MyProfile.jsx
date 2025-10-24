@@ -4,6 +4,7 @@ import { AuthContext } from "../Contexts/AuthContext";
 import { auth } from "../../firebase.config";
 import { FaUserEdit } from "react-icons/fa";
 import { IoCheckmark } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 const MyProfile = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -21,11 +22,11 @@ const MyProfile = () => {
     })
       .then(() => {
         setUser({ ...user, displayName: name, photoURL: photoURL });
-        console.log("✅ Profile updated successfully!");
+        toast.success("Profile updated successfully!");
         setEditMode(false);
       })
       .catch(() => {
-        console.log("❌ Failed to update profile.");
+        toast.error("Failed to update profile.");
       });
   };
 

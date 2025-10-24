@@ -1,6 +1,17 @@
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const ContactSection = () => {
+  const handleSend = (e) => {
+    e.preventDefault();
+    Swal.fire({
+      icon: "success",
+      title: "Success!",
+      text: "Your sending message has been submitted!",
+      confirmButtonColor: "#3085d6",
+    });
+    e.target.reset();
+  };
   return (
     <section className="relative bg-gray-900 text-white py-16 px-6 sm:px-12 lg:px-24 overflow-hidden">
       <div
@@ -56,12 +67,13 @@ const ContactSection = () => {
 
         <div className="bg-white rounded shadow-lg p-8 text-gray-800">
           <h3 className="text-xl font-bold mb-6">Send Message</h3>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSend}>
             <div>
               <input
                 type="text"
                 placeholder="Full Name"
                 className="w-full border-b border-gray-300 focus:outline-none py-2"
+                required
               />
             </div>
             <div>
@@ -69,6 +81,7 @@ const ContactSection = () => {
                 type="email"
                 placeholder="Email"
                 className="w-full border-b border-gray-300 focus:outline-none py-2"
+                required
               />
             </div>
             <div>
@@ -76,13 +89,13 @@ const ContactSection = () => {
                 placeholder="Type your Message..."
                 className="w-full border-b border-gray-300 focus:outline-none py-2 resize-none"
                 rows="4"
+                required
               />
             </div>
             <div>
               <button
-                type="button"
+                type="submit"
                 className="w-full bg-primary/90 text-white py-2 font-semibold rounded hover:bg-primary transition disabled:opacity-60"
-                disabled
               >
                 Send
               </button>
