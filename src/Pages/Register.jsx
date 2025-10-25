@@ -6,8 +6,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
-import { signOut, updateProfile } from "firebase/auth";
-import { auth } from "../../firebase.config";
+import { updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
 
 export default function Register() {
