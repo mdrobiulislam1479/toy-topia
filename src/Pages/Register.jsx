@@ -36,12 +36,10 @@ export default function Register() {
           displayName: name,
           photoURL: photoURL,
         });
-        signOut(auth).then(() => {
-          setLoading(false);
-          e.target.reset();
-          navigate("/login");
-          toast.success("Registration successful! Please log in.");
-        });
+        setLoading(false);
+        e.target.reset();
+        navigate("/");
+        toast.success("Registration successful!");
       })
       .catch((error) => {
         setLoading(false);
