@@ -10,6 +10,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import ForgetPassword from "../Pages/ForgotPassword";
 import MyProfile from "../Pages/MyProfile";
 import PrivateRoute from "./PrivateRoute";
+import ContactPage from "../Pages/ContactUs";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactPage />,
       },
       {
         path: "/my-profile",

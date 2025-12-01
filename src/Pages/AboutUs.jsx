@@ -1,6 +1,6 @@
 const AboutUs = () => {
   return (
-    <div className="py-26 px-6 ">
+    <div className="py-10 px-6 ">
       <title>ToyTopia | About Us</title>
       <div className="max-w-[1440px] mx-auto">
         <h1

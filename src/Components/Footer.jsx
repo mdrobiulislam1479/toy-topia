@@ -6,10 +6,7 @@ import { Link } from "react-router";
 const Footer = () => {
   return (
     <footer className="bg-primary text-white px-6 py-10">
-      <div
-        className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6"
-        data-aos="zoom-in"
-      >
+      <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between gap-8">
         <div>
           <Link to={"/"} className="text-3xl font-bold">
             Toy<span className="text-accent">Topia</span>

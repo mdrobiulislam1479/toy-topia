@@ -40,6 +40,11 @@ const Navbar = () => {
           About Us
         </NavLink>
       </li>
+      <li>
+        <NavLink to={"/contact-us"} onClick={closeDrawer}>
+          Contact Us
+        </NavLink>
+      </li>
       {user && (
         <li>
           <NavLink to={"/my-profile"} onClick={closeDrawer}>
@@ -51,14 +56,14 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="drawer fixed z-50 w-full">
+    <nav className="drawer z-50 sticky top-0 left-0 right-0 shadow-md">
       <input id="navbar-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content bg-primary">
-        <nav className="navbar max-w-[1440px] mx-auto text-white">
+        <nav className="navbar max-w-[1440px] mx-auto text-white  px-4">
           <div className="navbar-start flex items-center">
             <label
               htmlFor="navbar-drawer"
-              className="lg:hidden text-white px-3 cursor-pointer"
+              className="lg:hidden text-white pr-3 cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
