@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { Star, ShoppingCart, Heart, Share2, Check, X } from "lucide-react";
 import Swal from "sweetalert2";
 import useDataLoad from "../Hooks/useDataLoad";
-import { useParams } from "react-router";
+import { Navigate, useLocation, useNavigate, useParams } from "react-router";
 import LoadingSpinner from "../Components/LoadingSpinner";
-import ToyDetailsError from "../../../assignment - p-hero/toy-topia/src/Pages/ToyDetailsError";
+import { AuthContext } from "../Contexts/AuthContext";
+import ToyDetailsError from "./ToyDetailsError";
 
 const ToyDetails = () => {
+  const { user } = use(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
   const [isWishlisted, setIsWishlisted] = useState(false);
   const { data, loading } = useDataLoad();
   const { id } = useParams();
@@ -23,6 +27,12 @@ const ToyDetails = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!user) {
+      navigate("/login", { state: location?.pathname || "/" });
+      return;
+    }
+
     if (!formData.name || !formData.email) {
       Swal.fire({
         icon: "error",
@@ -59,7 +69,7 @@ const ToyDetails = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-[1440px] mx-auto px-4 py-12">
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
           {/* Header Section */}
           <div className="bg-primary p-8 text-white">
@@ -88,7 +98,7 @@ const ToyDetails = () => {
                 <img
                   src={toy.pictureURL}
                   alt={toy.toyName}
-                  className="w-full md:h-[500px]  rounded-2xl shadow-xl transform transition-transform duration-500"
+                  className="w-full md:h-[500px] sm:object-cover lg:object-contain rounded-2xl shadow-xl transform transition-transform duration-500"
                 />
                 <div className="absolute top-4 right-4 flex gap-2">
                   <button

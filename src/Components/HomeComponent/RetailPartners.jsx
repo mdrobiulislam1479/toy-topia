@@ -30,7 +30,7 @@ const partners = [
 const RetailPartners = () => {
   return (
     <section className="py-10 max-w-5xl mx-auto">
-      <h2 className="text-2xl font-bold text-center mb-6" data-aos="fade-right">
+      <h2 className="text-2xl font-bold text-center mb-6" data-aos="zoom-in">
         RETAIL PARTNERS
       </h2>
       <Marquee gradient={true} speed={50} pauseOnHover={true}>
