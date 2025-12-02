@@ -4,21 +4,22 @@ import { Link } from "react-router";
 const ToyCard = ({ toy }) => {
   return (
     <div
-      className="bg-primary/20 shadow-md rounded-lg overflow-hidden duration-200 hover:scale-105 p-5 flex flex-col justify-between "
+      className="bg-white shadow-lg rounded-xl p-4 hover:shadow-2xl transition border border-gray-200 hover:border-secondary"
       data-aos="fade-up"
     >
       <div className="bg-white rounded-xl relative">
         <img
           src={toy.pictureURL}
           alt={toy.toyName}
-          className="h-60 object-cover mx-auto"
+          className="h-60 object-cover mx-auto hover:scale-105 transition "
         />
         <p className="absolute right-3 bottom-3 bg-secondary/50 p-1 rounded-md">
           Qty: {toy.availableQuantity}
         </p>
       </div>
-      <div className="pt-4">
+      <div className="pt-4 flex flex-col justify-between sm:h-56">
         <h2 className="text-xl font-semibold text-base-300">{toy.toyName}</h2>
+        <p className="text-gray-600 mt-1 line-clamp-2">{toy.description}</p>
         <div className="mt-2 flex justify-between items-center text-sm text-gray-600">
           <p className="text-secondary font-bold text-xl">
             ${toy.price.toFixed(2)}

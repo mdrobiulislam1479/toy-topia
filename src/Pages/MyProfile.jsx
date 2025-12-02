@@ -32,9 +32,10 @@ const MyProfile = () => {
 
   return (
     <div
-      className="max-w-3xl mx-auto  mt-15 md:mt-40 bg-primary/20 rounded-lg shadow-lg p-6 flex flex-col md:flex-row md:gap-20 items-center justify-center"
+      className="max-w-3xl mx-auto   md:mt-40 bg-primary/20 rounded-lg shadow-lg p-6 flex flex-col md:flex-row md:gap-20 items-center justify-center"
       data-aos="fade-down"
     >
+      <title>ToyTopia | My Profile</title>
       <div className="md:pl-20">
         <img
           src={
