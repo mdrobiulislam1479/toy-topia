@@ -10,9 +10,13 @@ const PopularToys = () => {
 
   return (
     <section className="md:py-10 px-4 max-w-[1440px] mx-auto">
-      <h1 className="text-3xl font-bold text-center mb-8" data-aos="zoom-in">
+      <h1 className="text-3xl font-bold text-center mb-2" data-aos="zoom-in">
         Popular Toys
       </h1>
+      <p className="text-center text-gray-500 text-lg mb-8" data-aos="fade-up">
+        Discover our most loved and top-rated toys, chosen by happy kids and
+        parents!
+      </p>
       {loading ? (
         <PropagateLoader color="skyblue" className="text-center" />
       ) : (

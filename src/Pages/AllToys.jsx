@@ -32,11 +32,18 @@ const AllToys = () => {
       ) : (
         <section className="py-10 px-4 max-w-[1440px] mx-auto">
           <h1
-            className="text-3xl font-bold text-center mb-8"
+            className="text-3xl font-bold text-center mb-2"
             data-aos="zoom-in"
           >
             Our All Toys
           </h1>
+          <p
+            className="text-center text-gray-500 text-lg mb-8"
+            data-aos="fade-up"
+          >
+            Browse our complete collection of toys for every age, interest, and
+            occasion!
+          </p>
           <div
             className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4"
             data-aos="fade-down"
